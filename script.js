@@ -1,9 +1,8 @@
 
-let init = "trees"
+let init = "talon"
 let word = ""
-let darr = []
 let final = 0
-let canvas = new Raphael(0, 0, innerWidth, innerHeight)
+let canvas = new Raphael(0, 20, innerWidth, innerHeight-20)
 let board = new Array(5)
 let raphobj = new Array(5)
 let pboard = new Array(5)
@@ -82,23 +81,39 @@ onkeydown = (k) => {
           if(word.count(word[i])>init.count(word[i]) && word.count(word[i])>=1){
             if(word.substring(0,i).count(word[i]) == init.count(word[i])){
               console.log("Single")
+              pboard[rpointer][i] = 3;
             }else{
               console.log("dupe letters")
+              console.log(word[i])
+              pboard[rpointer][i] = 1
+              final++
             }
+          }else{
+            pboard[rpointer][i] = 1
+            console.log("position " + i + " matches in the correct spot")
           }
-					console.log("position " + i + " matches in the correct spot")
-					pboard[rpointer][i] = 1
-					final++
+          
+					
+					// final++
 				} else if (word.indexOf(init[i]) != init.indexOf(word[i]) && init.includes(word[i])) {
           if(word.count(word[i])>init.count(word[i]) && word.count(word[i])>=1){
             if(word.substring(0,i).count(word[i]) == init.count(word[i])){
               console.log("Single")
+              pboard[rpointer][i] = 3;
             }else{
               console.log("dupe letters")
+              pboard[rpointer][i] = 2
+              console.log("position " + i + " matches in the wrong spot")
+            }
+          }else{
+            if(word[i] == init[i]){
+              pboard[rpointer][i] = 1
+            }else{
+              pboard[rpointer][i] = 2
+              console.log("The letter " + word[i] + " is yellow, i=" +i)
             }
           }
-					console.log("position " + i + " matches in the wrong spot")
-					pboard[rpointer][i] = 2
+					// console.log("position " + i + " matches in the wrong spot")
 				} else {
 					pboard[rpointer][i] = 3;
 				}
